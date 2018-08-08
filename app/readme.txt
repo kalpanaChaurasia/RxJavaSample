@@ -1,4 +1,4 @@
-RxJava and RxAndroid Theory
+# RxJava and RxAndroid Theory
 =============================
 
 RxJava Operators => Attached rxjavaOperators.txt
@@ -50,7 +50,7 @@ Schedulers.from() – This allows us to create a scheduler from an executor by l
 When thread pool is occupied, tasks will be queued.
 
 
-RxJava Basics: Observable, Observer:
+# RxJava Basics: Observable, Observer:
 ----------------------------------------
 RxJava is all about two key components: Observable and Observer. In addition to these, there are other things like Schedulers,
 Operators and Subscription.
