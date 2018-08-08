@@ -1,3 +1,38 @@
 <resources>
     <string name="app_name">RxJavaSample</string>
+    <string name="click">Click</string>
+    <string name="just_operator">Just Operator</string>
+    <string name="filter_operator">Filter Operator</string>
+    <string name="operators">Select any operator</string>
+
+    <string-array name="operators">
+
+        <item>Average</item>
+        <item>Buffer</item>
+        <item>ConcatMap</item>
+        <item>Count</item>
+        <item>Debounce</item>
+        <item>Distinct</item>
+        <item>Filter</item>
+        <item>From</item>
+        <item>FlatMap</item>
+        <item>GroupBy</item>
+        <item>Join</item>
+        <item>Just</item>
+        <item>Map</item>
+        <item>Max</item>
+        <item>Merge</item>
+        <item>Min</item>
+        <item>Reduce</item>
+        <item>Repeat</item>
+        <item>Replay</item>
+        <item>Range</item>
+        <item>Skip</item>
+        <item>Sum</item>
+        <item>SwitchMap</item>
+        <item>Take</item>
+        <item>TakeUntil</item>
+        <item>Zip</item>
+    </string-array>
 </resources>
+

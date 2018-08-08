@@ -1,23 +1,25 @@
 package com.rxjavasample;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.AndroidException;
-import android.util.Log;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
+import android.widget.Spinner;
 
-import io.reactivex.Observable;
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Predicate;
-import io.reactivex.schedulers.Schedulers;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
 
 
-    private Button btnJustOperator;
+    @BindView(R.id.spinner1)
+    Spinner spinner;
+    @BindView(R.id.content)
+    FrameLayout contentFragment;
 
     @Override
     int getLayoutResource(Bundle savedInstanceState) {
@@ -25,25 +27,47 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    void initVariables(Bundle savedInstanceState) {
-        btnJustOperator = findViewById(R.id.button);
-    }
-
-    @Override
     void initData(Bundle savedInstanceState) {
-
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.operators, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        btnJustOperator.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            }
-        });
+    void bindData() {
+        ButterKnife.bind(this);
     }
 
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id) {
+        String selectedItem = adapterView.getItemAtPosition(position).toString();
+        Fragment fragment;
+        switch (position) {
+            case 6:
+                fragment = new FilterFragment();
+                break;
+            case 11:
+                fragment = new JustFragment();
+                break;
+            default:
+                fragment = null;
+                showToast("Implementation is in progress");
+                break;
+        }
+
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.content, fragment);
+            fragmentTransaction.commit();
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }
 

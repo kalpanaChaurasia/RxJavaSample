@@ -1,54 +1,53 @@
 package com.rxjavasample;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class JustActivity extends BaseActivity {
+public class JustFragment extends BaseFragment {
 
+    @BindView(R.id.output)
+    TextView txtOuput;
+
+
+    @Nullable
     @Override
-    int getLayoutResource(Bundle savedInstanceState) {
-        return R.layout.activity_second;
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_second, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
-    void initVariables(Bundle savedInstanceState) {
-
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        justOperatorExample();
     }
-
-    @Override
-    void initData(Bundle savedInstanceState) {
-
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        Button button = findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                justOperatorExample();
-            }
-        });
-    }
-
 
     private void justOperatorExample() {
-        Observable<String> testObservable = Observable.just("one", "two", "three");
-        Observer<String> animalsObserver = getAnimalObserver();
+        Observable<String> testObservable = Observable.just("one", "two", "three", "four");
+        Observer<String> animalsObserver = getNumberObserver();
         testObservable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(animalsObserver);
+
+        txtOuput.append("\n\nObservable<String> testObservable = Observable.just(\"one\", \"two\", \"three\", \"four\");\n" +
+                "Observer<String> animalsObserver = getNumberObserver();\n" +
+                "testObservable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(animalsObserver); \n\nOutput:=>\n");
     }
 
-    private Observer<String> getAnimalObserver() {
+    private Observer<String> getNumberObserver() {
         return new Observer<String>() {
 
             //Method will be called when an Observer subscribes to Observable
@@ -61,6 +60,7 @@ public class JustActivity extends BaseActivity {
             @Override
             public void onNext(String s) {
                 Log.d(TAG, "onNext " + s);
+                txtOuput.append(s + "\n");
             }
 
             //In case of any error, onError() method will be called.

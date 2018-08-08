@@ -54,6 +54,12 @@ Operators and Subscription.
 
 Observable: Observable is a data stream that do some work and emits data.
 
+The Observable class has dozens of static factory methods and operators, each in a wide variety of flavors for generating new
+Observables, or for attaching them to processes of interest. Observables are immutable, so operators always produce a new
+Observable.
+
+<b> Observable.just("Hello", "World").subscribe(System.out::println); </b>
+
 Observer: Observer is the counter part of Observable. It receives the data emitted by Observable.
 
 Subscription: The bonding between Observable and Observer is called as Subscription. There can be multiple Observers subscribed
