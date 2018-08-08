@@ -1,6 +1,9 @@
 RxJava and RxAndroid Theory
 =============================
 
+RxJava Operators => Attached rxjavaOperators.txt
+RxJava Operators by Category => Attached rxJavaOperatorCategory.txt
+
 Reactive Programming is basically event-based asynchronous programming. Everything you see is an asynchronous data stream, which
 can be observed and an action will be taken place when it emits values. You can create data stream out of anything; variable
 changes, click events, http calls, data storage, errors and what not. When it says asynchronous, that means every code module runs
@@ -69,3 +72,10 @@ Operator / Transformation: Operators modifies the data emitted by Observable bef
 
 Schedulers: Schedulers decides the thread on which Observable should emit the data and on which Observer should receives the
 data i.e background thread, main thread etc.,
+
+
+io.reactivex.Flowable: 0..N flows, supporting Reactive-Streams and backpressure
+io.reactivex.Observable: 0..N flows, no backpressure,
+io.reactivex.Single: a flow of exactly 1 item or an error,
+io.reactivex.Completable: a flow without items but only a completion or error signal,
+io.reactivex.Maybe: a flow with no items, exactly one item or an error.
