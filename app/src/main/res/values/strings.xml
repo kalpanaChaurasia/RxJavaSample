@@ -9,10 +9,12 @@
 
         <item>Average</item>
         <item>Buffer</item>
+        <item>Create</item>
         <item>ConcatMap</item>
         <item>Count</item>
         <item>Debounce</item>
         <item>Distinct</item>
+        <item>Defer</item>
         <item>Filter</item>
         <item>From</item>
         <item>FlatMap</item>

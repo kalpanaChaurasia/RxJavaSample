@@ -1,0 +1,102 @@
+Creator Observable
+==================
+
+
+Create      - Will create the observable without any parameter
+            - Pass a list as a global variable
+            - will call the respective method itself (onNext, onComplete or onError)
+
+Defer -
+
+
+From        - emit one by one given list
+            Types:   FromArray, FromIterable, FromCallable, FromFuture, FromPublisher
+            Eg: Observable.fromArray(new String[]{"A", "B", "C", "D", "E", "F"})
+
+Interval    -  Emit the data after given interval time
+            Eg: Observable.interval(1, TimeUnit.SECONDS) // (Interval, TimeUnit)
+
+Just        - Pass anything will emit all
+            - If pass Null it will return null
+            Eg: Observable.just(new String[]{"A", "B", "C", "D", "E", "F"})
+
+Range       - Will emit the data by specified range
+            - starting number and length
+            Eg: Observable.range(2, 5)
+
+Repeat      - Will repeat the same thing by given number
+            Observable.range(2, 5).repeat(2)
+
+Timer       - Will emit after specified time
+            - Call only one time
+            Eg:  Observable.timer(1, TimeUnit.SECONDS)
+
+Transforming observables
+============================
+
+Buffer      - Emit the item as a bundle instead of one at a time
+            - Observable.just("A", "B", "C", "D", "E", "F").buffer(2)
+
+Map         - is having function, Take input as a observable emit item and modified it and then emits modified item
+            - Order of insertion is maintained during emission
+            -   getOriginalObservable()
+                              .map(new Function<Integer, Integer>() {
+                                  @Override
+                                  public Integer apply(final Integer integer)  {
+                                      return (integer * 2);
+                                  }
+                              })
+
+            - Operator can be used when need to fetch data from server and need to modify it before emitting item
+
+FlatMap     - is having function, take input as observable emit item but instead of returning the modified item, it returns
+              observable itself
+            - They merge the items emitted by the multiple observables and return a single observables
+            - Order of insertion is not maintained during emission
+            - getOriginalObservable()
+                              .flatMap(new Function<Integer, Observable<Integer>>() {
+                                  @Override
+                                  public Observable<Integer> apply(final Integer integer)  {
+                                      return getModifiedObservable(integer);
+                                  }
+                              })
+
+SwitchMap   - Same as flat map - difference is
+            - Always use latest item
+
+ConcatMap   - Same as flat map - difference is, order of insertion is maintained during emission
+            - It will take too much of time
+Group by    -
+Scan        - transform one emit item into another item, same like Map but it will preserve the previous item
+            - below example output will be 1, 3, 6, 10 so on
+            -  Observable.range(1, 10)
+                              .scan(new BiFunction<Integer, Integer, Integer>() {
+                                  @Override
+                                  public Integer apply(Integer integer, Integer integer2) {
+                                      return (integer + integer2);
+                                  }
+                              })
+
+Filtering observables
+============================
+
+Debounce    -
+
+Distinct    -
+
+ElementAt   -
+
+Filter      -
+
+IgnoreElement -
+
+Sample      -
+
+Skip        -
+
+SkipLast    -
+
+Take        -
+
+TakeLast    -
+

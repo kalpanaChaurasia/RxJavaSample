@@ -8,14 +8,20 @@ Operators that originate new Observables.
 
 Create — create an Observable from scratch by calling observer methods programmatically
 Defer — do not create the Observable until the observer subscribes, and create a fresh Observable for each observer
+**The Observable.defer() is similar to create() except that it postpones the actual creation until an Observer subscribes.
+Each subscription would recall the Observable creation. This ensures that the Observer would always receive the latest data.
+Also, it ensures that no API calling occurs until Subscription. The data would be only fetched when required by the observer.
+
 Empty/Never/Throw — create Observables that have very precise and limited behavior
-From — convert some other object or data structure into an Observable
+From — Emit data from array one by one like for loop
 Interval — create an Observable that emits a sequence of integers spaced by a particular time interval
+**emits constant sequences of integers in ascending order which are evenly spaced by the interval specified.
 Just — convert an object or a set of objects into an Observable that emits that or those objects
 Range — create an Observable that emits a range of sequential integers
 Repeat — create an Observable that emits a particular item or sequence of items repeatedly
 Start — create an Observable that emits the return value of a function
 Timer — create an Observable that emits a single item after a given delay
+**emits value only after a certain time/delay. It emits only a single value after the delay.
 
 Transforming Observables
 ---------------------------------

@@ -45,10 +45,46 @@ public class MainActivity extends BaseActivity implements AdapterView.OnItemSele
         String selectedItem = adapterView.getItemAtPosition(position).toString();
         Fragment fragment;
         switch (position) {
+            case 0:
+                fragment = new FilterFragment();
+                break;
+            case 1:
+                fragment = new FilterFragment();
+                break;
+            case 2:
+                fragment = new CreateFragment();
+                break;
+            case 3:
+                fragment = new FilterFragment();
+                break;
+            case 4:
+                fragment = new FilterFragment();
+                break;
+            case 5:
+                fragment = new FilterFragment();
+                break;
             case 6:
                 fragment = new FilterFragment();
                 break;
+            case 7:
+                fragment = new DeferFragment();
+                break;
+            case 8:
+                fragment = new FilterFragment();
+                break;
+            case 9:
+                fragment = new FromFragment();
+                break;
+            case 10:
+                fragment = new FilterFragment();
+                break;
             case 11:
+                fragment = new FilterFragment();
+                break;
+            case 12:
+                fragment = new FilterFragment();
+                break;
+            case 13:
                 fragment = new JustFragment();
                 break;
             default:
