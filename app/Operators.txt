@@ -80,23 +80,82 @@ Scan        - transform one emit item into another item, same like Map but it wi
 Filtering observables
 ============================
 
-Debounce    -
+Debounce    - Emit the item after given timespan has passed
+            - Eg: Search using AutoCompleteTextview - If user enter character or query, then instead of hitting directly the
+              service instantly, using debounce operator we can wait for 2 sec once user stops entering it will hit the service.
+            - If user enters again before 2 sec finish, it will increase 2 sec more.
 
-Distinct    -
+Distinct    - Emits only non-duplicate item. (suppresses duplicate item)
+            - Work very well with primitive data type
+            - For custom data type use hashCode() and equals()
+            - Observable.just(10, 20, 20, 10, 30, 40, 70, 60, 70)
+                              .distinct()
 
-ElementAt   -
+ElementAt   - Emit the item using position (only one item)
+            -  Observable.just(1, 2, 3, 4, 5, 6)
+                              .elementAt(1)
+            - Input: [1, 2, 3, 4, 5, 6]
+              Output : elementAt index 1
+              onNext: 2
 
-Filter      -
+Filter      - Emit the predicate item
+            -  Observable.just(1, 2, 3, 4, 5, 6)
+                              .filter(new Predicate<Integer>() {
+                                  @Override
+                                  public boolean test(Integer integer) throws Exception {
+                                      return (integer % 2 == 0);
+                                  }
+                              })
+            - filters only the even numbers and emits those integers - Output below
+            - onNext: 2
+              onNext: 4
+              onNext: 6
 
-IgnoreElement -
+IgnoreElement - Ignore all the item or observable.
+              - Directly call onComplete(), or onError()
+              -     Observable.range(1, 10)
+                                .ignoreElements()
 
 Sample      -
 
-Skip        -
+Skip        - Skip (suppresses) the first n item -
+            - skip(4) - skip first 4 item and emit remaining items
+            -  Observable.just("A", "B", "C", "D", "E", "F", "G", "H", "I", "J")
+                              .skip(4)
+            - Output :
+            - onNext: E
+              onNext: F
+              onNext: G
+              onNext: H
+              onNext: I
+              onNext: J
 
-SkipLast    -
+SkipLast    - Skip (suppresses) the last n items.
+            - skip(4) - skip last 4 items
+            - Observable.just("A", "B", "C", "D", "E", "F", "G", "H", "I", "J")
+                              .skipLast(4)
+            - onNext: A
+              onNext: B
+              onNext: C
+              onNext: D
+              onNext: E
+              onNext: F
 
-Take        -
+Take        - It works reverse of skip. It will emit the fist n item
+            - take(4) - it will emit first 4 items
+            -  Observable.just("A", "B", "C", "D", "E", "F", "G", "H", "I", "J")
+                              .take(4)
+            - onNext: A
+              onNext: B
+              onNext: C
+              onNext: D
 
-TakeLast    -
+TakeLast    - It works reverse of skipLast. It will emit the last n item
+            - takeLast(4) - it will emit last 4 items
+            -  Observable.just("A", "B", "C", "D", "E", "F", "G", "H", "I", "J")
+                              .takeLast(4)
+            - onNext: G
+              onNext: H
+              onNext: I
+              onNext: J
 
