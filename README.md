@@ -58,6 +58,18 @@ Observable#observeOn(Scheduler) is made with a different Scheduler. When such a 
 
 #### RxJava 2 features several base classes you can discover operators on:
 
+All components are as follows:
+
+Flowable, Observable, Single, and Completable - does some work and emit values.
+
+Subsciption - work is going on or completed or is used to cancel.
+
+Operators - Modify Data
+
+Schedulers - Where the work should be done, which thread like main thread, etc.
+
+Subscriber/Disposable - where the response will be sent after work has been completed.
+
 Similar methods exists for the other data types, e.g., *Flowable.just(), Maybe.just() and Single.just
 
 io.reactivex.Flowable: 0..N flows, supporting Reactive-Streams and backpressure
