@@ -54,9 +54,37 @@ Observable#observeOn(Scheduler) is made with a different Scheduler. When such a 
 7.	Schedulers.trampoline() – executes tasks in First in – First out manner. – limiting the number of background threads to one.
 8.	Schedulers.from() – limiting the number of thread to be created, when thread pool is occupied, tasks will be queued.
 
+### Base classes
 
+#### RxJava 2 features several base classes you can discover operators on:
 
+All components are as follows:
+
+Flowable, Observable, Single, and Completable - does some work and emit values.
+
+Subsciption - work is going on or completed or is used to cancel.
+
+Operators - Modify Data
+
+Schedulers - Where the work should be done, which thread like main thread, etc.
+
+Subscriber/Disposable - where the response will be sent after work has been completed.
 
 Similar methods exists for the other data types, e.g., *Flowable.just(), Maybe.just() and Single.just
+
+io.reactivex.Flowable: 0..N flows, supporting Reactive-Streams and backpressure
+
+io.reactivex.Observable: 0..N flows, no backpressure,
+
+io.reactivex.Single: a flow of exactly 1 item or an error,
+
+io.reactivex.Completable: a flow without items but only a completion or error signal,
+
+io.reactivex.Maybe: a flow with no items, exactly one item or an error.
+
+
+
+
+
 
 
