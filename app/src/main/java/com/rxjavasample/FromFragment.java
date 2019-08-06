@@ -11,12 +11,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
 import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class FromFragment extends BaseFragment {
 
@@ -40,17 +42,25 @@ public class FromFragment extends BaseFragment {
 
     private void justOperatorExample() {
         List<Integer> numbers = new ArrayList<>();
-        numbers.add(1);
-        numbers.add(2);
-        numbers.add(3);
-        numbers.add(4);
+        numbers.add(6);
+        numbers.add(7);
+        numbers.add(8);
+        numbers.add(9);
 
-    // Observable<Integer> observable = Observable.fr
+        Integer[]  num = {1, 2, 3, 4, 5};
+
+     Observable<Integer> observable = Observable.fromArray(num);
+     Observer observer = getNumberObserver();
+     observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
+
+        Observable<Integer> observable1 = Observable.fromIterable(numbers);
+        Observer observer1 = getNumberObserver();
+        observable1.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(observer1);
 
     }
 
-    private Observer<String> getNumberObserver() {
-        return new Observer<String>() {
+    private Observer<Integer> getNumberObserver() {
+        return new Observer<Integer>() {
 
             //Method will be called when an Observer subscribes to Observable
             @Override
@@ -58,23 +68,19 @@ public class FromFragment extends BaseFragment {
                 Log.d(TAG, "onSubscribe");
             }
 
-            // This method will be called when Observable starts emitting the data.
             @Override
-            public void onNext(String s) {
-                Log.d(TAG, "onNext " + s);
-                txtOuput.append(s + "\n");
+            public void onNext(Integer integers) {
+                Log.d(TAG, "next - "+integers);
             }
 
-            //In case of any error, onError() method will be called.
             @Override
             public void onError(Throwable e) {
-                Log.d(TAG, "Error : " + e.getLocalizedMessage());
+
             }
 
-            //When an Observable completes the emission of all the items, onComplete() will be called.
             @Override
             public void onComplete() {
-                Log.d(TAG, "onComplete");
+
             }
         };
     }

@@ -92,7 +92,7 @@ Distinct    - Emits only non-duplicate item. (suppresses duplicate item)
                               .distinct()
 
 ElementAt   - Emit the item using position (only one item)
-            -  Observable.just(1, 2, 3, 4, 5, 6)
+            - Observable.just(1, 2, 3, 4, 5, 6)
                               .elementAt(1)
             - Input: [1, 2, 3, 4, 5, 6]
               Output : elementAt index 1
@@ -159,3 +159,44 @@ TakeLast    - It works reverse of skipLast. It will emit the last n item
               onNext: I
               onNext: J
 
+Combining observables
+============================
+
+CombineLatest
+
+Join
+
+Merge
+
+Concat
+
+Zip
+
+SwitchOnNext
+
+
+Utility operators
+================
+
+Delay —
+
+Do —
+
+Materialize/Dematerialize —
+
+ObserveOn —
+
+Serialize —
+
+SubscribeOn —
+
+TimeInterval —
+
+Timeout —
+
+Timestamp —
+
+Using —
+
+Conditional and Boolean Operators
+==================================

@@ -48,6 +48,7 @@ public class CreateFragment extends BaseFragment {
         Observer<String> animalsObserver = getNumberObserver();
         String[] al = {"one", "two", "three", "four", "five", "six", "seven"};
         final List<String> alphabets = Arrays.asList(al);
+
         Observable<String> testObservable = Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(ObservableEmitter<String> emitter) {
@@ -63,7 +64,6 @@ public class CreateFragment extends BaseFragment {
             }
         });
         testObservable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(animalsObserver);
-
         txtOuput.append("\n\nObservable<String> testObservable = Observable.just(\"one\", \"two\", \"three\", \"four\");\n" +
                 "Observer<String> animalsObserver = getNumberObserver();\n" +
                 "testObservable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(animalsObserver); \n\nOutput:=>\n");
