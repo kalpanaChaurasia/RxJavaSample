@@ -6,8 +6,13 @@
 trigger:
 - master
 
+variables:
+  uiSource: 'src'
+  uiBuild: '$(uiSource)/build'
+
 pool:
   vmImage: 'macos-latest'
+
 
 steps:
 - task: Gradle@2
@@ -18,3 +23,17 @@ steps:
     publishJUnitResults: false
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'assembleDebug'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(uiBuild)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
